@@ -22,7 +22,7 @@ object ProcessMessage {
             "inr."
         )
         var i = 0;
-        while (i < smsBody.size) {
+        while ( i < smsBody.size) {
             amountStr = smsBody.get(i).toLowerCase();
             System.out.println(amountStr)
             if (amountStr.contains(".")) {
