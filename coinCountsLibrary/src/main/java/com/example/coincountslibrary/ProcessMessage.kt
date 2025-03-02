@@ -22,28 +22,31 @@ object ProcessMessage {
             "inr."
         )
         var i = 0;
-        while ( i < smsBody.size) {
+        while (i < smsBody.size) {
             amountStr = smsBody.get(i).toLowerCase();
-            System.out.println(amountStr)
-            if (amountStr.contains(".")) {
+            System.out.println("The amount String is ${amountStr}")
+            //Log.d(TAG, "AmountStr: ${amountStr}")
+            if (identifierList.contains(amountStr)) {
+                amountPosition = i + 1;
+                currentAmount = smsBody.get(amountPosition);
+                //Log.d(TAG, "getProcessedAmount1: ${currentAmount}")
+                System.out.println("getProcessedAmount1: ${currentAmount}")
+                return currentAmount
+            } else if (amountStr.contains(".")) {
                 amountStr = amountStr.replace(".", " ")
                 var innerSplitz = amountStr.split(" ") as List<String>
                 var j = 0
                 if (identifierList.contains(innerSplitz[0]))
-                    System.out.println("//dev : Processed Amount :  ${currentAmount} ")
-                while (j < innerSplitz.size) {
-                    if (identifierList.contains(innerSplitz[j])) {
-                        amountPosition = j + 1;
-                        currentAmount = innerSplitz.get(amountPosition)
-                        break;
+                    while (j < innerSplitz.size) {
+                        if (identifierList.contains(innerSplitz[j])) {
+                            amountPosition = j + 1;
+                            currentAmount = innerSplitz.get(amountPosition)
+                            //Log.d(TAG, "getProcessedAmount2: ${currentAmount}")
+                            System.out.println("getProcessedAmount2: ${currentAmount}")
+                            return currentAmount
+                        }
+                        j++;
                     }
-                    j++;
-                }
-            } else if (identifierList.contains(amountStr)) {
-                amountPosition = i + 1;
-                currentAmount = smsBody.get(amountPosition);
-                System.out.println("//dev : Processed Amount :  ${currentAmount} ")
-                break;
             }
             i++;
         }
