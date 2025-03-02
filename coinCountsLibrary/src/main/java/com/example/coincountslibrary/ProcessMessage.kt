@@ -2,7 +2,7 @@ package com.example.coincountslibrary
 
 import android.util.Log
 
-object ProcessMessage {
+class ProcessMessage {
 
     var amountPosition = -1;
 
